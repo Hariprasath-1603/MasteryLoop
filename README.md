@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # MasteryLoop — Milestone 1 (M1)
 
 Adaptive Assessment, Psychometrically-Validated AI Item Generation, and Learning Intelligence Platform.
@@ -40,3 +41,6 @@ make etl
 # 5. Run test suite
 make test
 ```
+=======
+# MasteryLoop
+>>>>>>> ed0855c4aa885cb89308323932cc85d4df21e3f4
