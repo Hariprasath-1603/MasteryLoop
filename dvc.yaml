@@ -1,0 +1,30 @@
+stages:
+  prepare_ednet:
+    cmd: uv run python -m masteryloop_ml.data.prepare_ednet --input-path data/raw --output-dir data/processed
+    deps:
+      - data/raw
+      - ml/src/masteryloop_ml/data/prepare_ednet.py
+    params:
+      - etl.min_interactions_per_learner
+      - etl.max_latency_ms
+      - etl.synthetic_fallback_learners
+    outs:
+      - data/processed/interactions.parquet
+    metrics:
+      - data/processed/etl_metrics.json:
+          cache: false
+
+  split_sequences:
+    cmd: uv run python -m masteryloop_ml.data.splits --input-path data/processed/interactions.parquet --output-dir data/splits
+    deps:
+      - data/processed/interactions.parquet
+      - ml/src/masteryloop_ml/data/splits.py
+    params:
+      - splits.train_ratio
+      - splits.val_ratio
+      - splits.test_ratio
+      - splits.random_seed
+    outs:
+      - data/splits/train.parquet
+      - data/splits/val.parquet
+      - data/splits/test.parquet

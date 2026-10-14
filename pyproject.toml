@@ -1,0 +1,28 @@
+[project]
+name = "masteryloop"
+version = "0.1.0"
+description = "MasteryLoop - Adaptive Assessment, Psychometrically-Validated AI Item Generation, and Learning Analytics Platform"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
+
+[tool.uv.workspace]
+members = [
+    "libs/common",
+    "ml",
+]
+
+[tool.uv.sources]
+masteryloop-common = { workspace = true }
+masteryloop-ml = { workspace = true }
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+pythonpath = [
+    "libs/common/src",
+    "ml/src",
+]
+filterwarnings = [
+    "ignore::DeprecationWarning",
+]

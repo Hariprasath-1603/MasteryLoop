@@ -1,0 +1,15 @@
+etl:
+  min_interactions_per_learner: 15
+  max_interactions_per_learner: 1000
+  max_latency_ms: 300000
+  synthetic_fallback_learners: 500
+  synthetic_fallback_items: 100
+  synthetic_interactions_per_learner: 50
+  chunk_size: 100000
+  deduplicate_timestamps: true
+
+splits:
+  train_ratio: 0.70
+  val_ratio: 0.15
+  test_ratio: 0.15
+  random_seed: 42

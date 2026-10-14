@@ -1,0 +1,15 @@
+{
+  "python.defaultInterpreterPath": "${workspaceFolder}/.venv/Scripts/python.exe",
+  "python.analysis.extraPaths": [
+    "${workspaceFolder}/libs/common/src",
+    "${workspaceFolder}/ml/src"
+  ],
+  "python.autoComplete.extraPaths": [
+    "${workspaceFolder}/libs/common/src",
+    "${workspaceFolder}/ml/src"
+  ],
+  "python.testing.pytestEnabled": true,
+  "python.testing.pytestArgs": [
+    "tests"
+  ]
+}

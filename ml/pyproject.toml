@@ -1,0 +1,22 @@
+[project]
+name = "masteryloop-ml"
+version = "0.1.0"
+description = "Machine learning, knowledge tracing, and psychometric data pipelines for MasteryLoop"
+requires-python = ">=3.12"
+dependencies = [
+    "masteryloop-common",
+    "polars>=0.20.26",
+    "pyarrow>=16.0.0",
+    "numpy>=1.26.4",
+    "scipy>=1.13.0",
+    "pydantic>=2.7.0",
+    "pyyaml>=6.0.1",
+    "dvc>=3.50.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/masteryloop_ml"]

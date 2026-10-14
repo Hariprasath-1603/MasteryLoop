@@ -1,0 +1,60 @@
+schema: '2.0'
+stages:
+  prepare_ednet:
+    cmd: uv run python -m masteryloop_ml.data.prepare_ednet --input-path 
+      data/raw --output-dir data/processed
+    deps:
+    - path: data/raw
+      hash: md5
+      md5: 0815698d7887d5159083d1e30d624a93.dir
+      size: 49
+      nfiles: 1
+    - path: ml/src/masteryloop_ml/data/prepare_ednet.py
+      hash: md5
+      md5: 2bd5d3674d3747449fff8bcd4c87567f
+      size: 11886
+    params:
+      params.yaml:
+        etl.max_latency_ms: 300000
+        etl.min_interactions_per_learner: 15
+        etl.synthetic_fallback_learners: 500
+    outs:
+    - path: data/processed/etl_metrics.json
+      hash: md5
+      md5: a350d5e3ebb4401427a5f41c28078e73
+      size: 176
+    - path: data/processed/interactions.parquet
+      hash: md5
+      md5: 87bf2a34eb0764581578a41ab002d538
+      size: 228890
+  split_sequences:
+    cmd: uv run python -m masteryloop_ml.data.splits --input-path 
+      data/processed/interactions.parquet --output-dir data/splits
+    deps:
+    - path: data/processed/interactions.parquet
+      hash: md5
+      md5: 87bf2a34eb0764581578a41ab002d538
+      size: 228890
+    - path: ml/src/masteryloop_ml/data/splits.py
+      hash: md5
+      md5: 117c400fcd1d12b1de3fc2ba56920918
+      size: 5182
+    params:
+      params.yaml:
+        splits.random_seed: 42
+        splits.test_ratio: 0.15
+        splits.train_ratio: 0.7
+        splits.val_ratio: 0.15
+    outs:
+    - path: data/splits/test.parquet
+      hash: md5
+      md5: 7a3996ba98e866f9db5508c0a97d2345
+      size: 37979
+    - path: data/splits/train.parquet
+      hash: md5
+      md5: b623c5bcbd1310c362f3547f2b25a59f
+      size: 166078
+    - path: data/splits/val.parquet
+      hash: md5
+      md5: 7f7cc008384141149e0326aa8ea4f752
+      size: 38087
